@@ -90,7 +90,7 @@ public class App extends Application {
         Scene scene = new Scene(root, 400, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
-        primaryStage.setTitle("ApiScript v1.0");
+        primaryStage.setTitle("ApiScript v1.3");
         primaryStage.setAlwaysOnTop(false);
     }
 
