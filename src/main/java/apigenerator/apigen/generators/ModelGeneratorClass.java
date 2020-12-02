@@ -39,6 +39,12 @@ public class ModelGeneratorClass {
         if (field.contains("Data")) return "Date";
         if (field.contains("date")) return "Date";
         if (field.contains("data")) return "Date";
+        if (field.contains("suma")) return "BigDecimal";
+        if (field.contains("sum")) return "BigDecimal";
+        if (field.contains("max")) return "BigDecimal";
+        if (field.contains("Max")) return "BigDecimal";
+        if (field.contains("nr")) return "BigDecimal";
+        if (field.contains("Nr")) return "BigDecimal";
         else return "String";
     }
 

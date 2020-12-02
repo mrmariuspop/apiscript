@@ -10,9 +10,10 @@ public class ControlPanel {
         generateModelClass(sqlQuery, entityName, author);
         generateQueryClass(entityName, author, sqlQuery);
         generateDaoClass(entityName, author, nrQueryParam);
-        generateDaoImplClass(entityName,author,nrQueryParam);
-        generateServiceClass(entityName,author,nrQueryParam);
-        generateServiceImplClass(entityName,author,nrQueryParam);
-        generateControllerClass(entityName,author,nrQueryParam);
+        generateDaoImplClass(entityName, author, nrQueryParam);
+        generateServiceClass(entityName, author, nrQueryParam);
+        generateServiceImplClass(entityName, author, nrQueryParam);
+        generateControllerClass(entityName, author, nrQueryParam);
     }
 }
+

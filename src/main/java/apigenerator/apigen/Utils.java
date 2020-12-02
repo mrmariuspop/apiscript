@@ -64,10 +64,31 @@ public class Utils {
     private static List<String> getFinalListOfAttributes(String sqlQuery) {
         List<String> listOfLowerCases = toLowerCases(sqlQuery);
         List<String> listOfAttributes = new ArrayList<>();
+        List<String> listOfAggregatedAttributes = new ArrayList<>();
+        List<String> listOfNoParantAttributes = new ArrayList<>();
         for (String iterator:listOfLowerCases) {
             listOfAttributes.add(getFinalAttributeName(iterator));
         }
-        return listOfAttributes;
+
+        for (String iterator:listOfAttributes) {
+            listOfAggregatedAttributes.add(removeAggregatedKeyWords(iterator).replace("t.","").trim());
+        }
+
+        for(String iterator:listOfAggregatedAttributes) {
+            listOfNoParantAttributes.add(iterator.replaceAll("\\([^()]*\\)", "").trim());
+        }
+        System.out.println(listOfNoParantAttributes);
+        return listOfNoParantAttributes;
+    }
+
+    public static String removeAggregatedKeyWords(String attribute) {
+        if (attribute.contains("max") || attribute.contains("sum") || attribute.contains("avg")) {
+            return attribute.substring(3);
+        }
+        if (attribute.contains("count")){
+            return attribute.substring(5);
+        }
+        else return attribute;
     }
 
     private static String getFinalAttributeName(String field) {
