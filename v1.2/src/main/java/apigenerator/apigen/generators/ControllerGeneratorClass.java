@@ -46,7 +46,7 @@ public class ControllerGeneratorClass {
             iniialFile += "@RequestParam(name = \""+listOfParams.get(i-1)+""+""+"\", required = false) "+ getAttType(listOfParams.get(i-1))+" "+listOfParams.get(i-1)+""+""+",\n" +
                     "                                          ";
         }
-        iniialFile = iniialFile.substring(0, iniialFile.length() - 44);
+        iniialFile = (nrQueryParams >0)?iniialFile.substring(0, iniialFile.length() - 44):iniialFile;
 
         iniialFile += ") {\n" +
                 "        return " + entityName.substring(0, 1).toLowerCase() + entityName.substring(1) + "Service.get" + entityName + "s(";
