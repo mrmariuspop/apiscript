@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import static apigenerator.apigen.Utils.containsOnlyAlpha;
+
 public class App extends Application {
     private StackPane root = new StackPane();
     private Stage stage;
@@ -59,11 +61,30 @@ public class App extends Application {
             Set<String> queryParams = Utils.extractQueryParams(sqlTextField.getText());
             List<String> listOfParams = Utils.formatQueryParams(Utils.getAttributesFromSet(queryParams));
 
+            //validations on entity field
             if (sqlTextField.getText().equals("")
                     || entityNameTextField.getText().equals("")) {
                 generatedClassesLbl.setVisible(true);
                 generatedClassesLbl.setTextFill(Color.RED);
                 generatedClassesLbl.setText("Please fill in all the fields");
+            } else if (entityNameTextField.getText().contains(" ")) {
+                generatedClassesLbl.setVisible(true);
+                generatedClassesLbl.setTextFill(Color.RED);
+                generatedClassesLbl.setText("Entity name can not have spaces");
+            } else if (entityNameTextField.getText().charAt(0) == Character.toLowerCase(entityNameTextField.getText().charAt(0))) {
+                generatedClassesLbl.setVisible(true);
+                generatedClassesLbl.setTextFill(Color.RED);
+                generatedClassesLbl.setText("Entity name must start with capital");
+            } else if (!containsOnlyAlpha(entityNameTextField.getText())) {
+                generatedClassesLbl.setVisible(true);
+                generatedClassesLbl.setTextFill(Color.RED);
+                generatedClassesLbl.setText("Entity name must have only alpha numeric values");
+            }
+            //validations on sql field
+            else if (!sqlTextField.getText().toUpperCase().contains("SELECT")) {
+                generatedClassesLbl.setVisible(true);
+                generatedClassesLbl.setTextFill(Color.RED);
+                generatedClassesLbl.setText("Not a valid sql statement");
             } else {
                 try {
                     ControlPanel.generateClasses(
@@ -77,8 +98,10 @@ public class App extends Application {
                     generatedClassesLbl.setTextFill(Color.GREEN);
                     generatedClassesLbl.setText("Classes have been generated");
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    generatedClassesLbl.setVisible(true);
+                    generatedClassesLbl.setTextFill(Color.RED);
+                    generatedClassesLbl.setText("Classes not generated. Errors in query");
                 }
             }
 

@@ -250,4 +250,8 @@ public class Utils {
     public static String getAuthorFromPrincipal(String username) {
         return WordUtils.capitalize(username.replaceAll("[^A-Za-z]"," ")).replace("  "," ");
     }
+
+    public static boolean containsOnlyAlpha(String name) {
+        return Pattern.matches("[a-zA-Z]+",name) ;
+    }
 }
