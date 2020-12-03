@@ -248,6 +248,6 @@ public class Utils {
     }
 
     public static String getAuthorFromPrincipal(String username) {
-        return WordUtils.capitalize(username.replaceAll("[^A-Za-z]"," "));
+        return WordUtils.capitalize(username.replaceAll("[^A-Za-z]"," ")).replace("  "," ");
     }
 }

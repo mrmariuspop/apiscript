@@ -87,7 +87,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Scene scene = new Scene(root, 400, 600);
+        Scene scene = new Scene(root, 300, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setTitle("ApiScript v1.3");
